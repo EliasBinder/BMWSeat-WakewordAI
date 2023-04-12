@@ -8,21 +8,22 @@ import numpy as np
 import seaborn as sns
 import tensorflow as tf
 
-from tensorflow.keras import layers
-from tensorflow.keras import models
+from keras import layers
+from keras import models
 from IPython import display
 
 # Set the seed value for experiment reproducibility.
+
 seed = 42
 tf.random.set_seed(seed)
 np.random.seed(seed)
 
-# Import the mini Speech Commands dataset
+# Set up the data for training
 
 DATASET_PATH = 'resources/commands'
 data_dir = pathlib.Path(DATASET_PATH)
 
-# Get the commands from the folder names.
+# Get the voice commands from the folder names.
 
 commands = np.array(tf.io.gfile.listdir(str(data_dir)))
 commands = commands[(commands != 'README.md') & (commands != '.DS_Store')]
@@ -55,10 +56,12 @@ val_ds = val_ds.map(squeeze, tf.data.AUTOTUNE)
 
 
 # Split data into half to use 1/2 for training and 1/2 for validation
+
 test_ds = val_ds.shard(num_shards=2, index=0)
 val_ds = val_ds.shard(num_shards=2, index=1)
 
 # Visualize the data as a waveform
+
 rows = 3
 cols = 3
 n = rows * cols
@@ -78,7 +81,7 @@ for i in range(n):
     ax.set_yticks(np.arange(-1.2, 1.2, 0.2))
     label = label_names[example_labels[i]]
     ax.set_title(label)
-    ax.set_ylim([-1.1,1.1])
+    ax.set_ylim([-1.1, 1.1])
 
 plt.show()
 

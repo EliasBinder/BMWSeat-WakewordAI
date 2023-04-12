@@ -1,7 +1,6 @@
-from socket import socket
+import socket
 
 from src.udpServer.inputHandler import handle
-
 
 def createServer(port):
     server = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
