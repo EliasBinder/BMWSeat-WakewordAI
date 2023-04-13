@@ -7,7 +7,7 @@ from src.helpers.audio_helper import record_audio, terminate
 from src.helpers.tf_helper import preprocess_audiobuffer
 
 # !! Modify this in the correct order
-commands = ['stop']
+commands = ['no', 'stop', 'up', 'hey_bmw', 'right', 'left', 'go', 'down', 'yes']
 
 loaded_model = models.load_model("../../saved_model")
 
