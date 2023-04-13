@@ -1,6 +1,7 @@
 import numpy as np
 
 from keras import models
+import tensorflow as tf
 
 from src.helpers.audio_helper import record_audio, terminate
 from src.helpers.tf_helper import preprocess_audiobuffer
@@ -17,7 +18,8 @@ def predict_mic():
     prediction = loaded_model(spec)
     label_pred = np.argmax(prediction, axis=1)
     command = commands[label_pred[0]]
-    print(f"Predicted label: {command} with probability of {prediction[0][label_pred[0]]}")
+    print(f"Predicted label: {command} with probability of {tf.nn.softmax(prediction[0])[label_pred[0]] * 100} %")
+
     return command
 
 
