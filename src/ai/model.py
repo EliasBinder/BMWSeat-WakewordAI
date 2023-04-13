@@ -60,7 +60,7 @@ val_ds = val_ds.map(squeeze, tf.data.AUTOTUNE)
 test_ds = val_ds.shard(num_shards=2, index=0)
 val_ds = val_ds.shard(num_shards=2, index=1)
 
-# Visualize the data as a waveform
+# Visualize the data as a waveformoutput_sequence_length=16000 pads the short ones to exactly 1 second (and would trim longer ones) so that they can be easily batched.
 
 rows = 3
 cols = 3

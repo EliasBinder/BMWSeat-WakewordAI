@@ -1,11 +1,10 @@
 import wave
-
 import pyaudio
-
 from src.hardware.microphone import start_recording, stop_recording
 from src.tcpClient.client import setupConnection
 from src.udpServer.server import createServer
 from scipy.io.wavfile import write
+
 
 PORT = 5001
 PORT_MAINAPPLICATION = 5000
