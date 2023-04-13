@@ -8,7 +8,7 @@ from src.helpers.tf_helper import preprocess_audiobuffer
 # !! Modify this in the correct order
 commands = ['down', 'go', 'left', 'no', 'right', 'stop', 'up', 'yes']
 
-loaded_model = models.load_model("../../saved_model")
+loaded_model = models.load_model("saved_model")
 
 
 def predict_mic():
@@ -24,6 +24,8 @@ def predict_mic():
 if __name__ == "__main__":
     while True:
         command = predict_mic()
+        """
         if command == "stop":
             terminate()
             break
+        """
