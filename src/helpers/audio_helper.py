@@ -22,7 +22,7 @@ def record_audio():
     # print("start recording...")
 
     frames = []
-    seconds = 3
+    seconds = 2
     for i in range(0, int(RATE / FRAMES_PER_BUFFER * seconds)):
         data = stream.read(FRAMES_PER_BUFFER)
         frames.append(data)
