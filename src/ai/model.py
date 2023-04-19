@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import tensorflow as tf
+from audiomentations import Compose, AddGaussianNoise
 
 from keras import layers
 from keras import models
