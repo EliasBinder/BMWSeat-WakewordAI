@@ -5,7 +5,7 @@ from tensorflow.keras.utils import to_categorical
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, Activation, Dropout
 from sklearn.metrics import confusion_matrix, classification_report
-# from sklearn.metrics import plot_confusion_matrix
+#from sklearn.metrics import plot_confusion_matrix
 
 df = pd.read_pickle("resources/audio_data.csv")
 
@@ -21,13 +21,13 @@ x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # build the model
 
 model = Sequential([
-    Dense(256, input_shape=x_train[0].shape),
+    Dense(384, input_shape=x_train[0].shape),
     Activation('relu'),
-    Dropout(0.5),
-    Dense(256),
+    Dropout(0.33),
+    Dense(384),
     Activation('relu'),
-    Dropout(0.5),
-    Dense(2, activation='softmax')
+    Dropout(0.33),
+    Dense(3, activation='softmax')
 ])
 
 print("How the model looks like: \n")
@@ -50,4 +50,4 @@ print("Model Classification Report: \n")
 y_pred = np.argmax(model.predict(x_test), axis=1)
 cm = confusion_matrix(np.argmax(y_test, axis=1), y_pred)
 print(classification_report(np.argmax(y_test, axis=1), y_pred))
-# plot_confusion_matrix(cm, classes=["Undefined", "Hey BMW", "Stop"], title="Confusion Matrix")
+#plot_confusion_matrix(cm, classes=["Undefined", "Hey BMW", "Stop"], title="Confusion Matrix")
