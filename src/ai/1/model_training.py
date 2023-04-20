@@ -21,13 +21,13 @@ x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # build the model
 
 model = Sequential([
-    Dense(384, input_shape=x_train[0].shape),
+    Dense(256, input_shape=x_train[0].shape),
     Activation('relu'),
-    Dropout(0.33),
-    Dense(384),
+    Dropout(0.5),
+    Dense(256),
     Activation('relu'),
-    Dropout(0.33),
-    Dense(3, activation='softmax')
+    Dropout(0.5),
+    Dense(2, activation='softmax')
 ])
 
 print("How the model looks like: \n")

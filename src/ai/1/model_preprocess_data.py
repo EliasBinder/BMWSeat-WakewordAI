@@ -6,9 +6,9 @@ import pandas as pd
 all_data = []
 
 data_path_dict = {
-    0: ["resources/commands/stop/" + file_path for file_path in os.listdir("resources/commands/stop/")],
-    1: ["resources/commands/hey_bmw/" + file_path for file_path in os.listdir("resources/commands/hey_bmw/")],
-    2: ["resources/commands/undefined/" + file_path for file_path in os.listdir("resources/commands/undefined/")]
+    0: ["resources/commands/undefined/" + file_path for file_path in os.listdir("resources/commands/undefined/")],
+    #1: ["resources/commands/hey_bmw/" + file_path for file_path in os.listdir("resources/commands/hey_bmw/")],
+    1: ["resources/commands/stop/" + file_path for file_path in os.listdir("resources/commands/stop/")]
 }
 
 for class_label, list_of_files in data_path_dict.items():
