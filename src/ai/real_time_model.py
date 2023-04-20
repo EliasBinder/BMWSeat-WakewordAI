@@ -3,7 +3,7 @@ import numpy as np
 from keras import models
 import tensorflow as tf
 
-from src.helpers.audio_helper import record_audio, terminate
+from src.helpers.audio_helper import record_audio
 from src.helpers.tf_helper import preprocess_audiobuffer
 
 # !! Modify this in the correct order
