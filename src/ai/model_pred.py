@@ -12,10 +12,9 @@ class_names = ["Wake Word NOT Detected", "Wake Word Detected"]
 model = load_model("saved_model/WWD.h5")
 
 print("Prediction Started: ")
-i = 0
 while True:
-    print("Say Now: ")
-    myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
+    print("Say something...")
+    myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
     sd.wait()
     write(filename, fs, myrecording)
 
@@ -24,11 +23,11 @@ while True:
     mfcc_processed = np.mean(mfcc.T, axis=0)
 
     prediction = model.predict(np.expand_dims(mfcc_processed, axis=0))
-    if prediction[:, 1] > 0.99:
-        print(f"Wake Word Detected for ({i})")
-        print("Confidence:", prediction[:, 1])
-        i += 1
+
+    if prediction[:, 0] < 0.95:
+        print(f"Wake Word Detected for (STOP)")
+        print(prediction)
 
     else:
         print(f"Wake Word NOT Detected")
-        print("Confidence:", prediction[:, 0])
+        print(prediction)

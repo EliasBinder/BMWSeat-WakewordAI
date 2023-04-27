@@ -1,11 +1,12 @@
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, Activation, Dropout
-from sklearn.metrics import confusion_matrix, classification_report
-#from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
 
 df = pd.read_pickle("resources/audio_data.csv")
 
@@ -16,17 +17,18 @@ y = np.array(df["class_label"].tolist())
 y = to_categorical(y)
 
 # split for training and testing
-x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.8, random_state=42, shuffle=True)
 
 # build the model
 
+# TODO: consider using convolutional layers
 model = Sequential([
     Dense(256, input_shape=x_train[0].shape),
     Activation('relu'),
-    Dropout(0.5),
+    Dropout(0.3),
     Dense(256),
     Activation('relu'),
-    Dropout(0.5),
+    Dropout(0.3),
     Dense(2, activation='softmax')
 ])
 
@@ -47,7 +49,11 @@ print(score)
 
 # Classification Report
 print("Model Classification Report: \n")
-y_pred = np.argmax(model.predict(x_test), axis=1)
-cm = confusion_matrix(np.argmax(y_test, axis=1), y_pred)
-print(classification_report(np.argmax(y_test, axis=1), y_pred))
-#plot_confusion_matrix(cm, classes=["Undefined", "Hey BMW", "Stop"], title="Confusion Matrix")
+clf = SVC(random_state=0)
+clf.fit(x_train, np.argmax(y_train, axis=1))
+SVC(random_state=0)
+predictions = clf.predict(x_test)
+cm = confusion_matrix(np.argmax(y_test, axis=1), predictions, labels=clf.classes_)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=clf.classes_)
+disp.plot()
+plt.show()
