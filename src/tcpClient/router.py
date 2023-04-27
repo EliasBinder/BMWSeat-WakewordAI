@@ -1,9 +1,8 @@
 from src.tcpClient.handlers.listen import handleListen
 
 
-def handleAction(action):
-    match action:
-        case "listen":
-            handleListen()
-        case _:  # default
-            print(f"[TCPClient] Unknown action: {action}")
+def handleAction(action, event, data):
+    if action == "listen":
+        handleListen(event, data)
+    else:
+        print(f"[TCPClient] Unknown action: {action}")
