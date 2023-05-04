@@ -18,9 +18,14 @@ def start_prediction(event):
     while True:
         if not event.is_set():
             continue
+
         print("Say something...")
         myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
         sd.wait()
+
+        if not event.is_set():
+            continue
+
         write(filename, fs, myrecording)
 
         audio, sample_rate = librosa.load(filename)

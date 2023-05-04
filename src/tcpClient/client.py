@@ -26,10 +26,11 @@ def setup_connection(serverPort=5000, event=None):
 def startListening(event):
     while True:
         data = clientSocket.recv(1024)
-        data = json.loads(data)
-        if data["type"] == "action":
-            action = data["action"]
-            handleAction(action, event, data["data"])
+        if data:
+            data = json.loads(data)
+            if data["type"] == "action":
+                action = data["action"]
+                handleAction(action, event, data["data"])
 
 
 def sendWakeCommand():
